@@ -53,7 +53,7 @@ route:
 
 pipeline:
   ssh:
-    keypath: apps/customers
+    keypath: secrets/apps/customers
     keyname: id_ed25519
   secret:
     name: customers-ssh-git
