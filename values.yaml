@@ -9,6 +9,8 @@ namespace:
 
 replicaCount: 1
 
+user: {{ code_red_breach_challenge_gitea_customize_lab_username }}
+
 image:
   pullPolicy: Always
   registry: Quay
