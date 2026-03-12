@@ -34,6 +34,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: appcm
+          env:
+            - name: NS
+              value: {{ .Values.user }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ .Values.image.host }}/quayadmin/{{ .Values.image.name }}
