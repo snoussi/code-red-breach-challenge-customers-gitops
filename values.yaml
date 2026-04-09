@@ -50,8 +50,8 @@ service:
   port: 8080
 
 route:
-  host: ""
-  path: /
+  host: customers-{{ code_red_breach_challenge_gitea_customize_lab_username }}.{{ openshift_cluster_ingress_domain }}
+  path: /customers
 
 pipeline:
   ssh:
