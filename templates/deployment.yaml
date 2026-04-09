@@ -1,17 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quarkus-template
+  name: {{ include "customers.name" . }}
   labels:
-    {{- include "backstage.labels" . | nindent 4 }}
-    {{- include "quarkus-template.labels" . | nindent 4 }}
+    {{- include "customers.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "quarkus-template.selectorLabels" . | nindent 6 }}
+      {{- include "customers.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,14 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "backstage.labels" . | nindent 8 }}
-        {{- include "quarkus-template.selectorLabels" . | nindent 8 }}
+        {{- include "customers.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "quarkus-template.serviceAccountName" . }}
+      serviceAccountName: {{ include "customers.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -39,11 +37,11 @@ spec:
               value: {{ .Values.user }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: {{ .Values.image.host }}/quayadmin/{{ .Values.image.name }}
+          image: {{ include "customers.image" . }}
           ports:
             - name: http
               containerPort: 8080
-              protocol: TCP          
+              protocol: TCP
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
