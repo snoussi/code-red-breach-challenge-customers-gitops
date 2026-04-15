@@ -53,6 +53,18 @@ route:
   host: customers-{{ code_red_breach_challenge_gitea_customize_lab_username }}.{{ openshift_cluster_ingress_domain }}
   path: /customers
 
+databaseSecretMount: true
+# Override Kubernetes Secret name; when empty, uses <image.name>-database-credentials
+databaseSecretName: ""
+
+
+# JDBC URL + optional H2 user/password only (db-kind is fixed at Quarkus image build time, not here).
+databaseSecret:
+  create: true
+  # jdbcUrl: ""
+  # username: ""
+  # password: ""
+
 pipeline:
   ssh:
     keypath: secrets/apps/customers

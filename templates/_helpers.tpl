@@ -63,3 +63,10 @@ Build the container image reference
 {{- define "customers.image" -}}
 {{- printf "%s/%s/%s" .Values.image.host .Values.image.organization .Values.image.name -}}
 {{- end }}
+
+{{/*
+Name of the database credentials Secret (must match secretRef in the Deployment).
+*/}}
+{{- define "customers.databaseSecretName" -}}
+{{- .Values.databaseSecretName | default (printf "%s-database-credentials" .Values.image.name) }}
+{{- end }}
