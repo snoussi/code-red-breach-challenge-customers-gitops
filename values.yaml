@@ -50,7 +50,7 @@ service:
   port: 8080
 
 route:
-  host: customers-{{ code_red_breach_challenge_gitea_customize_lab_username }}.{{ openshift_cluster_ingress_domain }}
+  host: ""
   path: /customers
 
 databaseSecretMount: true
